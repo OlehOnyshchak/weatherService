@@ -16,8 +16,9 @@ var getJSON = function(url, callback) {
 
 function onProcess() {
     let dataSource = getDataSource();
+    let daysCount = getDaysCount();
 
-    let req = `http://localhost:3000/weather${dataSource}`;
+    let req = `http://localhost:3000/weather${dataSource}/${daysCount}`;
     getJSON(req, (err, data) => {
         if (err !== null) {
             alert('Something went wrong: ' + err);
@@ -29,6 +30,11 @@ function onProcess() {
 
 function getDataSource() {
     var e = document.getElementById("dataSource");
+    return e.options[e.selectedIndex].value;
+}
+
+function getDaysCount() {
+    var e = document.getElementById("daysCount");
     return e.options[e.selectedIndex].value;
 }
 

@@ -7,9 +7,9 @@ app.use(cors());
 
 const dataSource = require(`./data-source`);
 
-app.get('/weather/darkSky', async (req, res, next) => {
+app.get('/weather/darkSky/:days([0-9]+)', async (req, res, next) => {
     try {
-        let result = await dataSource.forecast(dataSource.dataSource.darkSky);
+        let result = await dataSource.forecast(dataSource.dataSource.darkSky, req.params.days);
         res.status(200).json(result);
     }
     catch (e) {
@@ -17,9 +17,9 @@ app.get('/weather/darkSky', async (req, res, next) => {
     }
 });
 
-app.get('/weather/apixu', async (req, res, next) => {
+app.get('/weather/apixu/:days([0-9]+)', async (req, res, next) => {
     try {
-        let result = await dataSource.forecast(dataSource.dataSource.apixu);
+        let result = await dataSource.forecast(dataSource.dataSource.apixu, req.params.days);
         res.status(200).json(result);
     }
     catch (e) {
@@ -27,9 +27,9 @@ app.get('/weather/apixu', async (req, res, next) => {
     }
 });
 
-app.get('/weather/openWeather', async (req, res, next) => {
+app.get('/weather/openWeather/:days([0-9]+)', async (req, res, next) => {
     try {
-        let result = await dataSource.forecast(dataSource.dataSource.openWeather);
+        let result = await dataSource.forecast(dataSource.dataSource.openWeather, req.params.days);
         res.status(200).json(result);
     }
     catch (e) {
@@ -37,8 +37,8 @@ app.get('/weather/openWeather', async (req, res, next) => {
     }
 });
 
-app.get('/weather', (req, res, next) => {
-    dataSource.forecast(dataSource.dataSource.composite)
+app.get('/weather/:days([0-9]+)', (req, res, next) => {
+    dataSource.forecast(dataSource.dataSource.composite, req.params.days)
     .then(data => {
         res.status(200);
         res.send(data);
