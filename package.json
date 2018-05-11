@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "cors": "^2.8.4",
     "dark-sky": "^1.1.3",
     "express": "^4.16.3"
   }
